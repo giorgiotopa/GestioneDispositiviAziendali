@@ -12,8 +12,8 @@ public class Dispositivo {
 
     private String tipo;
 
-    @Enumerated
     @Column(name = "stato_dispositivo")
+    @Enumerated(EnumType.STRING)
     private StatoDispositivo statoDispositivo;
 
     @ManyToOne
