@@ -4,6 +4,7 @@ import it.epicode.GestioneDispositiviAziendali.exception.BadRequestException;
 import it.epicode.GestioneDispositiviAziendali.model.Dipendente;
 import it.epicode.GestioneDispositiviAziendali.model.Dispositivo;
 import it.epicode.GestioneDispositiviAziendali.model.DispositivoRequest;
+import it.epicode.GestioneDispositiviAziendali.service.DipendenteService;
 import it.epicode.GestioneDispositiviAziendali.service.DispositivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 public class DispositivoController {
     @Autowired
     private DispositivoService dispositivoService;
+    @Autowired
+    private DipendenteService dipendenteService;
 
     @GetMapping("/dispositivi")
     public Page<Dispositivo> getAll(Pageable pageable){
@@ -53,12 +56,11 @@ public class DispositivoController {
         dispositivoService.deleteDispositivo(id);
     }
 
-//    @PatchMapping("/dispositivi/{id}/upload")
-//    public Dispositivo uploadAvatar(@PathVariable int id, @RequestParam("dipendete") MultipartFile file) throws IOException {
-//
-//        Dipendente dipendente =
-//        return dispositivoService.addDipendente(id,);
-//
-//    }
+    @PatchMapping("/dispositivi/{id}/upload")
+    public Dispositivo addDipendente(@PathVariable int id, @RequestParam("dipendeteId") int dipendenteId) throws IOException {
+
+        return dispositivoService.addDipendente(id, dipendenteId);
+
+    }
 }
 

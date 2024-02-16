@@ -50,9 +50,10 @@ public class DispositivoService {
         dispositivoRepository.delete(dispositivo);
     }
 
-//    public Dispositivo addDipendente(int id, Dipendente dipendente){
-//        Dispositivo dispositivo = getDispositiviById(id);
-//        dispositivo.setDipendente(dipendente);
-//        return dispositivoRepository.save(dispositivo);
-//    }
+    public Dispositivo addDipendente(int id, int dipendenteId){
+        Dispositivo dispositivo = getDispositiviById(id);
+        Dipendente dipendente = dipendenteService.getDipendenteById(dipendenteId);
+        dispositivo.setDipendente(dipendente);
+        return dispositivoRepository.save(dispositivo);
+    }
 }
