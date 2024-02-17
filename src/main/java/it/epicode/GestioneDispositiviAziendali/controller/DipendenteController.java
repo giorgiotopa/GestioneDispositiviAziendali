@@ -5,6 +5,7 @@ import it.epicode.GestioneDispositiviAziendali.exception.BadRequestException;
 import it.epicode.GestioneDispositiviAziendali.model.Dipendente;
 import it.epicode.GestioneDispositiviAziendali.model.DipendenteRequest;
 import it.epicode.GestioneDispositiviAziendali.service.DipendenteService;
+import it.epicode.GestioneDispositiviAziendali.service.DispositivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,7 @@ public class DipendenteController {
 
     @DeleteMapping("/dipendenti/{id}")
     public void deleteDipendente(@PathVariable int id){
-        dipendeteService.deleteDipendente(id);
+            dipendeteService.deleteDipendente(id);
     }
 
     @PatchMapping("/dipendenti/{id}/upload")

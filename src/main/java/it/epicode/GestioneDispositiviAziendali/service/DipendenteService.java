@@ -3,7 +3,9 @@ package it.epicode.GestioneDispositiviAziendali.service;
 import it.epicode.GestioneDispositiviAziendali.exception.NotFoundException;
 import it.epicode.GestioneDispositiviAziendali.model.Dipendente;
 import it.epicode.GestioneDispositiviAziendali.model.DipendenteRequest;
+import it.epicode.GestioneDispositiviAziendali.model.Dispositivo;
 import it.epicode.GestioneDispositiviAziendali.repository.DipendenteRepository;
+import it.epicode.GestioneDispositiviAziendali.repository.DispositivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,10 +13,14 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DipendenteService {
     @Autowired
     private DipendenteRepository dipendenteRepository;
+    @Autowired
+    private DispositivoRepository dispositivoRepository;
     @Autowired
     private JavaMailSenderImpl javaMailSender;
 
@@ -55,6 +61,11 @@ public class DipendenteService {
 
     public void deleteDipendente(int id) throws NotFoundException {
         Dipendente dipendente = getDipendenteById(id);
+        for (Dispositivo dispositivo : dipendente.getDispositivi()) {
+            dispositivo.setDipendente(null);
+            dispositivoRepository.save(dispositivo);
+
+        }
         dipendenteRepository.delete(dipendente);
     }
 
